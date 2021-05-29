@@ -1,0 +1,40 @@
+{% extends 'default.html' %}
+{% load custom_filters %}
+
+{% block title %}
+    News
+{% endblock title %}
+ 
+{% block content %}
+    <h2>News</h2>
+    <p>(total news on the site: {{ posts|length }})</p>
+    <hr>
+    {% if posts %}
+        <table style="margin-left: auto; margin-right: auto;">
+        {% for post in posts|dictsortreversed:"create_data" %}
+            <tr>
+                <td style="vertical-align: top; padding-right: 5vh;">
+                    <h6>{{ post.id }}</h6>
+                </td>
+                <td>
+                    <h6 style="text-align: justify">
+                        <a href="{{ post.id }}" style="text-decoration: none; color: #339999;">{{ post.title|censor }}</a>
+                        <i>({{ post.create_data|date:'M d Y' }})</i></h6>
+                    <p style="text-align: justify">{{ post.content|truncatewords:20|censor }}</p>
+                </td>
+                <td>
+                    <p>{{ post.creat_data }}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>      
+    {% else %}
+        <h3>No news. Come back later!</h3>
+    {% endif %}
+
+{% endblock content %}

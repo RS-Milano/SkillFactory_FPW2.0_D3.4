@@ -1,0 +1,16 @@
+{% extends 'default.html' %}
+{% load custom_filters %}
+
+{% block title %}
+    News
+{% endblock title %}
+
+{% block content %}
+    <a href="/.." style="text-decoration: none; color: #339999;">
+        <h4 style="text-align: left">All news</h4>
+    </a>
+    <h2>{{ post.title|censor }}</h2>
+    <hr>
+    <h3><i>{{ post.author }} | {{ post.create_data|date:"d-m-Y P" }}</i></h3>
+    <p style="text-align: justify">{{ post.content|censor }}</p>
+{% endblock content %}
